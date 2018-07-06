@@ -1,32 +1,44 @@
 # [Project Rome](index.md)
 
-## Windows
-### [How-to guides](https://docs.microsoft.com/windows/uwp/launch-resume/connected-apps-and-devices)
-### [API reference](https://docs.microsoft.com/uwp/api/windows.system.remotesystems)
+## [Commanding](commanding/index.md)
+### Windows
+#### How-to guides
+#### API reference
+### Android
+#### How-to guides
+#### API reference
+### iOS
+#### How-to guides
+#### API reference
+### MSGraph
 
-## [Microsoft Graph (preview)](MSGraph/index.md)
+## [Hosting](hosting/index.md)
+### Windows
+### Android
+### iOS
 
-## [Android (preview)](Android/index.md)
-### [How-to guides](Android/how-to-guides/index.md)
-#### [Getting started](Android/how-to-guides/getting-started-rome-android.md)
-#### [Commanding Guide](Android/how-to-guides/command-remote-devices-and-apps-android.md)
-#### [Hosting Guide](Android/how-to-guides/hosting-android.md)
-#### [User Activities Guide](Android/how-to-guides/user-activities-android.md)
-### [API reference](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.base._async_operation.asyncoperation)
+## [User Activities](user-activities/index.md)
+### Windows
+### Android
+### iOS
+### MSGraph
 
+## [MSGraph Notifications](msgraph-notifications/index.md)
+### Setup
+### Sending notifications with MSGraph APIs
+### Receiving notifications with the Project Rome SDK
+#### Windows
+##### How-to guides
+##### API reference
+#### Android
+##### How-to guides
+##### API reference
+#### iOS
+##### How-to guides
+##### API reference
 
-## [iOS (preview)](iOS/index.md)
-### [How-to guides](iOS/how-to-guides/index.md)
-#### [Getting started](iOS/how-to-guides/getting-started-rome-ios.md)
-#### [Commanding Guide](iOS/how-to-guides/command-remote-devices-and-apps-ios.md)
-#### [Hosting Guide](iOS/how-to-guides/hosting-ios.md)
-#### [User Activities Guide](iOS/how-to-guides/user-activities-ios.md)
-### [API reference](iOS/api-reference/index.md)
-#### [Base](iOS/api-reference/relay/base/index.md)
-#### [Commanding](iOS/api-reference/relay/commanding/index.md)
-#### [Core](iOS/api-reference/relay/core/index.md)
-#### [Discovery](iOS/api-reference/relay/discovery/index.md)
-#### [Hosting](iOS/api-reference/relay/hosting/index.md)
-#### [UserActivities](iOS/api-reference/activities/useractivities/index.md)
-#### [UserData](iOS/api-reference/activities/userdata/index.md)
+## [Nearby sharing](nearby-sharing/index.md)
+### Windows
+### Android
+
 
