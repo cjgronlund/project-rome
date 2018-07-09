@@ -205,4 +205,4 @@ RegistrationHelperClass.register(this, null, null, new EventListener<UserAccount
 
 At this point, your next actions will depend on which scenario(s) you intend to implement. For Device Relay scenarios, such as launching an app on a remote device or communicating with an app service on a remote device, see the [Command remote devices and apps](command-remote-devices-and-apps-android.md) guide (this also covers nearby sharing with other devices). For User Activities scenarios, such as creating, publishing, and reading Windows user activities, see the [Publish and read user activities](user-activities-android.md) guide. To make your app a host (able to be remotely launched or deliver app service resources to a remote device), see the [Host cross-device experiences](hosting-android.md) guide.
 
-[!INCLUDE [asdf](/project-rome-docs/includes/android/platform-init.md)]
+[!INCLUDE [asdf](../../../../project-rome-docs/includes/android/platform-init.md)]
