@@ -5,4 +5,4 @@ Here you will find how-to guides and API reference documentation for developers 
 * First, see the [Getting started](how-to-guides/getting-started-rome-android.md) guide for all the preliminary steps needed to set up the Rome client SDK for Android.
 * Then, see the [Commanding guide](how-to-guides/command-remote-devices-and-apps-android.md) for instructions on using Commanding features.
 * See the [API reference](api-reference/index.md) page for links to the reference docs relevant to these scenarios.
-* Take a look at the [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) to see a working example of Project Rome features.
+* See the [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) to see a working example of Project Rome features.
