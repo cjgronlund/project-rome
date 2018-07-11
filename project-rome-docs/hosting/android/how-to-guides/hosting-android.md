@@ -6,7 +6,7 @@ keywords: microsoft, windows, project rome, Android api reference
 
 # Hosting cross-device experiences (Android)
 
-This guide shows how to make your app available as a host app that can be remotely launched or provide app service resources to a remote client device. The [Command remote devices and apps](command-remote-devices-and-apps-android.md) guide shows how to set up the client side of these actions.
+This guide shows how to make your app available as a host app that can be remotely launched or provide app service resources to a remote client device. The [Command remote devices and apps](../../../commanding/android/how-to-guides/command-remote-devices-and-apps-android.md) guide shows how to set up the client side of these actions.
 
 The Project Rome SDK enables scenarios that allow apps to communicate with either an Android or iOS device. This includes the syncing of User Activities on the device as well as launching and messaging. 
 

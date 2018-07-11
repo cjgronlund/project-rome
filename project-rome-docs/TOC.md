@@ -5,8 +5,8 @@
 #### How-to guides
 #### API reference
 ### Android
-#### How-to guides
-#### API reference
+#### [How-to guide](commanding/android/how-to-guides/command-remote-devices-and-apps-android.md)
+#### [API reference](commanding/android/api-reference/index.md)
 ### iOS
 #### How-to guides
 #### API reference
@@ -15,11 +15,15 @@
 ## [Hosting](hosting/index.md)
 ### Windows
 ### Android
+#### [How-to guide](hosting/android/how-to-guides/hosting-android.md)
+#### [API reference](hosting/android/api-reference/index.md)
 ### iOS
 
 ## [User Activities](user-activities/index.md)
 ### Windows
 ### Android
+#### [how-to guide](user-activities/android/how-to-guides/user-activities-android.md)
+#### [API reference](user-activities/android/api-reference/index.md)
 ### iOS
 ### MSGraph
 

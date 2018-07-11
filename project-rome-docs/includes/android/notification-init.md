@@ -1,5 +1,5 @@
 
-## Preliminary setup: push notifications
+## Preliminary setup for push notifications
 
 ### Register your app for push notifications
 
@@ -7,7 +7,7 @@ Register your application with Google for notification support ([Firebase Cloud 
 
 ### Register your app form cross-device Connected Devices Platform access
 
-Next, register your app for the [cross-device experiences feature of the Microsoft Developer Dashboard](https://developer.microsoft.com/dashboard/crossplatform/web). This is a different procedure from registering on the Windows Dev Center, which was covered in the [Getting started guide](getting-started-rome-android.md). It authorizes the Connected Devices Platform to send notifications using the native push notification service. The Dev Center on-boarding process will require:
+Next, register your app for the [cross-device experiences feature of the Microsoft Developer Dashboard](https://developer.microsoft.com/dashboard/crossplatform/web). This is a different procedure from registering on the Windows Dev Center, which was covered in the preliminary steps above. It authorizes the Connected Devices Platform to send notifications using the native push notification service. The Dev Center on-boarding process will require:
 * Your app's client ID.
 * The Google Cloud Messaging key (for Android). This is needed in order to deliver data and commands to the app (on a device which may be locked or asleep) in the form of notifications. 
 
@@ -17,7 +17,7 @@ After you complete the workflow on the Developer dashboard, you must modify the 
 
 ### Provide the local Platform with access to the notification service
 
-Finally, you must associate push notification functionality with the Connected Devices Platform in your app. In the [Getting started guide](getting-started-rome-android.md), you initialized the Platform with a `null` *notificationProvider* parameter. Here, you need to construct and pass in an object that implements **[NotificationProvider](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.core._notification_provider)**. The main point of note is the `getNotificationRegistrationAsync` method, which must return a **[NotificationRegistration](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.core._notification_registration)** instance. The **NotificationRegistration** is responsible for supplying the Connected Devices Platform with an access token (and related information) for the notification service.
+Finally, you must associate push notification functionality with the Connected Devices Platform in your app. In the steps above, you initialized the Platform with a `null` *notificationProvider* parameter. Here, you need to construct and pass in an object that implements **[NotificationProvider](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.core._notification_provider)**. The main point of note is the `getNotificationRegistrationAsync` method, which must return a **[NotificationRegistration](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.core._notification_registration)** instance. The **NotificationRegistration** is responsible for supplying the Connected Devices Platform with an access token (and related information) for the notification service.
 
 
 ```Java

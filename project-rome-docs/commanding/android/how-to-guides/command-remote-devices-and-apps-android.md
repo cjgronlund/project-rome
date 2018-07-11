@@ -167,7 +167,7 @@ It's important to note that a remote launch can target a remote device (in which
 
 Depending on the URI that is sent, you can launch an app in a specific state or configuration on a remote device. This allows for the ability to continue a user task, like watching a movie, on a different device without interruption. 
 
-As the previous section demonstrates, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices Platform (just as you registered your own app in the [Getting started guide](getting-started-rome-android.md)). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
+As the previous section demonstrates, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices Platform (just as you registered your own app in the preliminary steps above). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
 
 ```java
 // this could be a RemoteSystemApplication instead. Either way, it 
@@ -221,7 +221,7 @@ Your Android app can use the Connected Devices Portal interact with app services
 This provides many ways to communicate with other devices&mdash;all without needing to bring an app to the foreground of the host device. 
 
 #### Set up the app service on the target device
-This guide will use the [Roman Test App for Windows](http://aka.ms/romeapp) as its target app service. In other words, the code below will cause an Android app to look for that specific app service on the given remote system. If you wish to test this scenario, download the Roman Test App on a Windows device and make sure you are signed in with the same MSA account you used in the [Getting started guide](getting-started-rome-android.md). 
+This guide will use the [Roman Test App for Windows](http://aka.ms/romeapp) as its target app service. In other words, the code below will cause an Android app to look for that specific app service on the given remote system. If you wish to test this scenario, download the Roman Test App on a Windows device and make sure you are signed in with the same MSA you used in the preliminary steps above. 
 
 For instructions on how to write your own UWP app service, see [Create and consume an app service](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).
 
