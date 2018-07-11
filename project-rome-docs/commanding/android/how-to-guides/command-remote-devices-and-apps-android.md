@@ -4,14 +4,16 @@ description: This guide will show how to discover remote devices and apps and th
 keywords: microsoft, windows, project rome, Android api reference 
 ---
 
-## Command remote devices and apps (Android)
+# Command remote devices and apps (Android)
 
 The commanding scenarios, featured in the Device Relay namespaces, use a watcher pattern in which available devices are detected over time through various types of network connections and corresponding events are raised. This guide will show how to discover remote devices and apps and then launch apps or interact with app services.
+
+First, initialize the Connected Devices platform. If you have done this already, skip to the next section.
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
 
 
-### Discover remote devices and apps
+## Discover remote devices and apps
 
 A **RemoteSystemWatcher** instance will handle the core functionality of this section.
 
@@ -154,8 +156,8 @@ public void stopWatcher() {
     mWatcher.stop();
 }
 ```
-
-At this point in your code, you should have a working list of **RemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The three major types of actions are remote launching, remote app services, and nearby file sharing. They are explained in the following three sections.
+## Implement a commanding scenario
+At this point in your code, you should have a working list of **RemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The two major types of interactions are remote launching and remote app services. They are explained in the following three sections.
 
 ### A) Remote launching
 
@@ -514,5 +516,4 @@ private void closeAppServiceConnection()
 
 
 ### Related topics
-* [Getting started with Connected Devices (Android)](getting-started-rome-android.md)
-* [Create and consume an app service](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).
+* [Create and consume an app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).

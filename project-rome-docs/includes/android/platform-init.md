@@ -57,7 +57,7 @@ import com.microsoft.connecteddevices.*;
 Depending on which scenarios you implement, you many not need all namespaces. You may also need to add other Android-native namespaces as you progress.
 
 
-## Initialize the Connected Devices platform
+### Initialize the Connected Devices platform
 
 Before any Connected Devices features can be used, the platform must be initialized. 
 
@@ -167,6 +167,8 @@ public static void register(Context context, ArrayList<AppServiceProvider> appSe
     registration.start();
 }
 ```
+
+### Register your application with the Connected Devices platform
 
 In your main class, after **Platform** initialization, add the following code to register the application. Note that for the purpose of this simple example, app service providers and launch URI handler are not provided.
 

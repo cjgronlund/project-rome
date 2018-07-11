@@ -6,13 +6,19 @@ keywords: microsoft, windows, project rome, Android api reference
 
 # Publishing and reading User Activities (Android)
 
-> **Important:** Before you use this guide, make sure you have completed all of the preliminary steps laid out in [Getting started with Connected Devices](getting-started-rome-android.md). Additionally, you will need to have completed the "Preliminary setup" section of the [Hosting guide](hosting-android.md).
-
 User Activities are data constructs that represent a user's tasks within an application. They make it possible to save a snapshot of a current task to be continued at a later time. The [Windows Timeline](https://blogs.windows.com/windowsexperience/2018/04/27/make-the-most-of-your-time-with-the-new-windows-10-update/) feature presents Windows users with a scrollable list of all their recent activities, represented as cards with text and graphics. For more information about User Activities in general, see [Continue user activity, even across devices](https://docs.microsoft.com/windows/uwp/launch-resume/useractivities).
 
 With the Project Rome SDK, your Android app can not only publish User Activities for use in Windows features such as Timeline, but it can also act as an endpoint and read Activities back to the user just as Timeline does. This allows cross-device apps to completely transcend their platforms and present experiences that follow users rather than devices.
 
 > Important: As this is a preview release, there are some known bugs in the Project Rome platform. Currently, Windows apps cannot read Activities created by Android/iOS apps, and the same holds true for the reverse. We are working on a timely fix. 
+
+First, you must initialize the Connected Devices Platform. If you've done this already, skip to the next section.
+
+[!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
+
+Next, you must enable your app to receive push notifications. If you've done this already, skip to the next section.
+
+[!INCLUDE [android/notification-init](../../../includes/android/notification-init.md)]
 
 ## Initialize a User Activity channel
 
