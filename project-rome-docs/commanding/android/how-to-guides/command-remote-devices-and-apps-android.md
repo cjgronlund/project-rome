@@ -8,25 +8,27 @@ keywords: microsoft, windows, project rome, Android api reference
 
 The commanding scenarios, featured in the Device Relay namespaces, use a watcher pattern in which available devices are detected over time through various types of network connections and corresponding events are raised. This guide will show how to discover remote devices and apps and then launch apps or interact with app services.
 
-First, initialize the Connected Devices platform. If you have done this already, skip to the next section.
+First, initialize the Connected Devices platform and register your app. If you have done this already, skip to the next section.
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
 
 
 ## Discover remote devices and apps
 
-A **RemoteSystemWatcher** instance will handle the core functionality of this section.
+A **RemoteSystemWatcher** instance will handle the core functionality of this section. Declare one in the class which is to discover remote systems.
 
 ```Java
 private RemoteSystemWatcher mWatcher = null;
 ```
 
-Before you create a watcher and start discovering devices, you must determine which discovery filters your app will apply. This can be determined by the user or hard-coded into the app, depending on your use case.
+Before you create a watcher and start discovering devices, you must determine which discovery filters your app will apply. This can be decided by user input or hard-coded into the app, depending on your use case.
+
 ```Java
 private void onStartWatcherClicked() {
-    //RemoteSystemWatcher cannot be started unless the platform is 
+    // RemoteSystemWatcher cannot be started unless the platform is 
     // initialized and the user is logged in. It may be helpful to use
     // methods like these to track the state of the application.
+    // See the sample app for their implementations.
     if (!getMainActivity().isSignedIn()) {
         return;
     }
@@ -34,10 +36,10 @@ private void onStartWatcherClicked() {
         return;
     }
 
-    // create a list of filters. Filter choices below are arbitrary.
+    // create and populate a list of filters. The filter choices below are arbitrary.
     ArrayList<RemoteSystemFilter> filters = new ArrayList<>();
 
-    /*  RemoteSystemDiscoveryType filters can be used to filter the types of Remote Systems we discover
+    /*  RemoteSystemDiscoveryType filters can be used to filter the types of Remote Systems you discover.
     Possible values:
         ANY(0),
         PROXIMAL(1),
@@ -46,7 +48,7 @@ private void onStartWatcherClicked() {
     */
     filters.add(new RemoteSystemDiscoveryTypeFilter(RemoteSystemDiscoveryType.ANY));
 
-    /*  RemoteSystemStatusType filters can be used to filter the status of Remote Systems we discover
+    /*  RemoteSystemStatusType filters can be used to filter the status of Remote Systems you discover.
     Possible values:
         ANY(0),
         AVAILABLE(1)
@@ -62,8 +64,7 @@ private void onStartWatcherClicked() {
     RemoteSystemKindFilter kindFilter = new RemoteSystemKindFilter(kinds);
     filters.add(kindFilter);
     
-
-    /*  RemoteSystemAuthorizationKind determines the types of user you want to discover
+    /*  RemoteSystemAuthorizationKind determines the category of user whose system(s) you want to discover.
     Possible values:
         SAME_USER(0),
         ANONYMOUS(1)
@@ -78,17 +79,13 @@ At this point, the app can initialize the watcher object.
     // ...
     
     // Create a RemoteSystemWatcher
-    // test for empty filters, in case the above code depends on user input.
-    if (filters.isEmpty()) {
-        mWatcher = new RemoteSystemWatcher();
-    } else {
-        mWatcher = new RemoteSystemWatcher(filters.toArray(new RemoteSystemFilter[filters.size()]));
+    mWatcher = new RemoteSystemWatcher(filters.toArray(new RemoteSystemFilter[filters.size()]));
     }
 
     // ...
 ```
 
-Immediately following the initialization, you should register event handlers for the watcher's events, which is how your app will parse and interact with devices that are discovered. It is recommended that your app maintain a list of discovered devices (represented by **RemoteSystem** instances) and display information about available devices and their apps (such as display name and device type) on the UI. When the registrations are set up, you can create the watcher.
+Immediately following initialization, you should register event handlers for the watcher's events, which determine how your app will parse and interact with devices that are discovered. It is recommended that your app maintain a set of discovered devices (represented by **RemoteSystem** instances) and display information about available devices and their apps (such as display name and device type) on the UI. Once the event handlers are set up, you can start the watcher.
 
 ```Java
     // ...
@@ -109,10 +106,10 @@ Immediately following the initialization, you should register event handlers for
     }
 }
 
-// do not call the above method without defining the watcher's event handlers.
+// do not call the above method without defining the watcher's event handlers (below).
 ```
 
-The following classes are used as event listeners for the watcher instance.
+The following class stubs can be used as event listeners for the watcher instance.
 
 ```Java
 private class RemoteSystemAddedListener implements EventListener<RemoteSystemWatcher, RemoteSystem> {
@@ -144,7 +141,7 @@ private class RemoteSystemWatcherErrorOccurredListener implements EventListener<
 }
 ```
 
-Once `mWatcher.start` is called, it will begin watching for remote system activity and will raise events when connected devices are discovered, updated, or removed from the set of detected devices. It will scan continuously in the background, so it is recommended that you stop the watcher when you no longer need it to avoid unnecessary network communication and battery drain.
+Once `mWatcher.start` is called, it will begin watching for remote system activity and will raise events when devices are discovered, updated, or removed from the set of discovered devices. It will scan continuously in the background, so it is recommended that you stop the watcher when you no longer need it to avoid unnecessary network communication and battery drain.
 
 ```Java
 // if you call this from the activity's onPause method, you ensure that
@@ -157,7 +154,7 @@ public void stopWatcher() {
 }
 ```
 ## Implement a commanding scenario
-At this point in your code, you should have a working list of **RemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The two major types of interactions are remote launching and remote app services. They are explained in the following three sections.
+At this point in your code, you should have a working list of **RemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The two major types of interactions are remote launching and remote app services. They are explained in the following sections.
 
 ### A) Remote launching
 

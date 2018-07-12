@@ -1,18 +1,17 @@
 
-## Preliminary setup for Connected Devices functionality
+## Preliminary setup for the Connected Devices platform
 
-Before implementing remote connectivity, there are a few steps you'll need to take to give your Android app the capability to connect to remote Windows devices.
+Before implementing remote connectivity, there are a few steps you'll need to take to give your Android app the capability to connect to remote devices.
 
 ### Sign-in
 
-Microsoft Account (MSA) authentication is required for all features of the SDK, other than the Nearby Sharing APIs. 
+Microsoft Account (MSA) authentication is required for all features of the SDK, except for the Nearby Sharing APIs. 
 
 If you do not already have an MSA, Register for one on [account.microsoft.com](https://account.microsoft.com/account).
 
-The Project Rome SDK requires an OAuth 2.0 access token to register with the platform. An OAuth 2.0 access token can be obtained using the developer's preferred method. In an attempt to help developers onboard with the platform more easily, we have provided an authentication provider as part of the  
-Android and iOS samples. The [sample authentication provider](https://github.com/Microsoft/project-rome/tree/master/Android/samples/account-provider-sample) can be used to obtain the OAuth 2.0 access token and refresh token for your app.
+Next, you must register your app with Microsoft by following the cross platform instructions on the [Application Registration Portal](https://apps.dev.microsoft.com/) (if you do not have a Microsoft developer account, you must create one first). You should receive a client ID string for your app; save this for later. This will allow your app to access Microsoft's Connected Devices platform resources. 
 
-Next, you must register your app with Microsoft by following the cross platform instructions on the [Application Registration Portal](https://apps.dev.microsoft.com/) (if you do not have a Microsoft developer account created, you must do this first). You should receive a client ID string for your app - save this for later. This will allow your app to access Microsoft's Connected Devices Platform resources. 
+### Add the SDK
 
 Insert the following repository references into the *build.gradle* file at the root of your project.
 
@@ -38,8 +37,6 @@ If you wish to use ProGuard in your app, add the ProGuard Rules for these new AP
 
 In your project's *AndroidManifest.xml* file, add the following permissions inside the `<manifest>` element (if they are not already present). This gives your app permission to connect to the Internet and to enable Bluetooth discovery on your device.
 
-> **Note:** The Bluetooth-related permissions are only necessary for using Bluetooth discovery; they are not needed for the other features in the Connected Devices platform. Additionally, `ACCESS_COARSE_LOCATION` is only required on Android SDKs 21 and later. On Android SDKs 23 and later, the developer must also prompt the user to grant location access at runtime.
-
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -48,24 +45,30 @@ In your project's *AndroidManifest.xml* file, add the following permissions insi
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
-Next, go to the activity class(es) where you would like the Connected Devices functionality to live. Add the **connecteddevices** namespaces.
+> [!NOTE]
+> The Bluetooth-related permissions are only necessary for using Bluetooth discovery; they are not needed for the other features in the Connected Devices platform. Additionally, `ACCESS_COARSE_LOCATION` is only required on Android SDKs 21 and later. On Android SDKs 23 and later, the developer must also prompt the user to grant location access at runtime.
+
+Next, go to the activity class(es) where you would like the Connected Devices functionality to live. Import the **connecteddevices** namespaces.
 
 ```java
 import com.microsoft.connecteddevices.*;
 ```
 
-Depending on which scenarios you implement, you many not need all namespaces. You may also need to add other Android-native namespaces as you progress.
-
+Depending on which scenarios you implement, you many not need all of the namespaces. You may also need to add other Android-native namespaces as you progress.
 
 ### Initialize the Connected Devices platform
 
-Before any Connected Devices features can be used, the platform must be initialized. 
+Before any Connected Devices features can be used, the platform must be initialized within your app. The initialization steps should occur in your main class' **onCreate** or **onResume** method, because they are required before other Connected Devices scenarios can take place. 
 
-The **Platform** class' constructor takes three parameters: the **Context** for the app, a **NotificationProvider**, and a **UserAccountProvider**. This section shows how to get these parameters. These initialization steps should occur in your main class' **onCreate** or **onResume** method, because they are required before other Connected Devices scenarios can take place. 
+You must instantiate the **Platform** class. The **Platform** constructor takes three parameters: the **Context** for the app, a **NotificationProvider**, and a **UserAccountProvider**.
 
-The **NotificationProvider** parameter is only needed for remote app hosting and User Activities, which are not covered in this guide. It can be left `null` for the scenarios here.
+The **NotificationProvider** parameter is only needed for certain scenarios. It can be left `null` for now.
 
-The **UserAccountProvider** is needed to deliver an ID for the current user to the Connected Devices Platform. It will be called the first time the app is run and upon the expiration of a platform-managed refresh token. This is where the class(es) in the [sample authentication provider](https://github.com/Microsoft/project-rome/tree/master/Android/samples/account-provider-sample) can be used. In the code below, `getSignInHelper()` references an **MSAAccountProvider**, also initialized below; this provided class implements the **UserAccountProvider** interface, and it facilitates the account-fetching process.
+The **UserAccountProvider** is needed to deliver an OAuth 2.0 access token for the current user's access to the Connected Devices platform. It will be called the first time the app is run and upon the expiration of a platform-managed refresh token. 
+
+In an attempt to help developers onboard with the platform more easily, we have provided account provider implementations for Android and iOS. These implementations, found in the [authentication provider sample](https://github.com/Microsoft/project-rome/tree/master/Android/samples/account-provider-sample), can be used to obtain the OAuth 2.0 access token and refresh token for your app.
+
+In the code below, `getSignInHelper()` references an **MSAAccountProvider**, also initialized below; this provided class implements the **UserAccountProvider** interface, and it facilitates the account-fetching process.
 
 ```Java
 private MSAAccountProvider mSignInHelper;
@@ -91,7 +94,7 @@ mSignInHelper.addUserAccountChangedListener(new EventListener<UserAccountProvide
 });
 ```
 
-Then, construct a **Platform** instance. You may wish to put the following code in a separate helper class. 
+Now you can construct a **Platform** instance. You may wish to put the following code in a separate helper class. 
 
 ```Java
 // Platform helper class:
@@ -102,18 +105,22 @@ private static Platform sPlatform;
 
 // This is the main Platform-generating method
 public static synchronized Platform getOrCreatePlatform(Context context, UserAccountProvider accountProvider, NotificationProvider notificationProvider) {
+    // check whether the local platform variable is already initialized.
     Platform platform = getPlatform();
 
     if (platform == null) {
+        // if it is not initialized, do so:
         platform = createPlatform(context, accountProvider, notificationProvider);
     }
     return platform;
 }
 
+// gets the local platform variable
 public static synchronized Platform getPlatform() {
         return sPlatform;
 }
 
+// creates and returns a new Platform instance
 public static synchronized Platform createPlatform(Context context, UserAccountProvider accountProvider, NotificationProvider notificationProvider) {
     sPlatform = new Platform(context, accountProvider, notificationProvider);
     return sPlatform;
@@ -136,19 +143,24 @@ You should shut down the platform when your app exits the foreground.
 mPlatform.shutdownAsync();
 ```
 
-> **Important:** As this is a preview release, there are some known bugs in the Project Rome platform. Currently, shutting down the Connected Devices Platform will cause the app to crash. This is trivial if it is only done when the app is exiting, but we are working on a timely fix. 
+> [!IMPORTANT] 
+> As this is a preview release, there are some known bugs in the Project Rome platform. Currently, shutting down the Connected Devices Platform will cause the app to crash. This is trivial if it is only done when the app is exiting, but we are working on a timely fix. 
 
-Next, you must register the application with the Connected Devices Platform cloud directory. You may wish to put the following method in a separate helper class.
+### Register app with the cloud directory
+
+Next, you must register the application with the Connected Devices platform cloud directory. You may wish to put the following method in a separate helper class.
 
 ```Java
 
-public static void register(Context context, ArrayList<AppServiceProvider> appServiceProviders, LaunchUriProvider launchUriProvider, EventListener<UserAccount, CloudRegistrationStatus> listener) {
+public static void registerApp(Context context, ArrayList<AppServiceProvider> appServiceProviders, LaunchUriProvider launchUriProvider, EventListener<UserAccount, CloudRegistrationStatus> listener) {
     
     // initialize the ApplicationRegistration with all possible services
+
     RemoteSystemApplicationRegistrationBuilder builder = new RemoteSystemApplicationRegistrationBuilder();
+    // add app-specific attributes 
     builder.addAttribute("SampleAttribute", "Value");
 
-    // Add the given AppService and LaunchUri Providers to the registration builder
+    // Add the passed-in AppService and LaunchUri Providers to the registration builder
     if (appServiceProviders != null) {
         for (AppServiceProvider provider : appServiceProviders) {
             builder.addAppServiceProvider(provider);
@@ -161,16 +173,14 @@ public static void register(Context context, ArrayList<AppServiceProvider> appSe
     // Build the ApplicationRegistration instance
     IRemoteSystemApplicationRegistration registration = builder.buildRegistration();
 
-    // Add the given EventListener to handle registration completion
+    // Add the passed-in EventListener to handle registration completion
     registration.addCloudRegistrationStatusChangedListener(listener);
     // start cloud registration
     registration.start();
 }
 ```
 
-### Register your application with the Connected Devices platform
-
-In your main class, after **Platform** initialization, add the following code to register the application. Note that for the purpose of this simple example, app service providers and launch URI handler are not provided.
+In your main class, after **Platform** initialization, add the following code to register the application. Note that app service providers and the launch URI handler, which are only needed for certain scenarios, are not provided at this step.
 
 ```Java
 RegistrationHelperClass.register(this, null, null, new EventListener<UserAccount, CloudRegistrationStatus>() {
