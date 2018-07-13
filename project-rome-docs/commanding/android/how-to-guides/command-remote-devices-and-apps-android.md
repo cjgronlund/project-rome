@@ -8,11 +8,11 @@ keywords: microsoft, windows, project rome, Android api reference
 
 Here you will find guidance on how to implement commanding scenarios in your Android apps. [!INCLUDE [android/dev-reqs](../../../includes/android/dev-reqs.md) 
 
-See the [API reference](api-reference/index.md) page for links to the reference docs relevant to these scenarios. See the [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) for a working example of Project Rome features.
+See the [API reference](../api-reference/index.md) page for links to the reference docs relevant to these scenarios. See the [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) for a working example of Project Rome features.
 
 The commanding scenarios, featured in the Device Relay namespaces, use a watcher pattern in which available devices are detected over time through various types of network connections and corresponding events are raised. This guide will show how to discover remote devices and apps and then launch apps or interact with app services.
 
-First, initialize the Connected Devices Platform and register your app. If you have done this already, skip to the next section.
+First, initialize the Connected Devices Platform. If you have done this already, skip to the next section.
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
 
@@ -29,7 +29,7 @@ A **RemoteSystemWatcher** instance will handle the core functionality of this se
 private RemoteSystemWatcher mWatcher = null;
 ```
 
-Before you create a watcher and start discovering devices, you must determine which discovery filters your app will apply. This can be decided by user input or hard-coded into the app, depending on your use case.
+Before you create a watcher and start discovering devices, you may wish to add discovery filters to determine which kinds of devices your app will target. These can be determined by user input or hard-coded into the app, depending on your use case.
 
 ```Java
 private void onStartWatcherClicked() {
@@ -162,6 +162,7 @@ public void stopWatcher() {
 }
 ```
 ## Implement a commanding scenario
+
 At this point in your code, you should have a working list of **RemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The main types of interaction are remote launching and remote app services. They are explained in the following sections.
 
 ### A) Remote launching

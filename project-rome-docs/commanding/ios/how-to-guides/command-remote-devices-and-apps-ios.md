@@ -7,22 +7,32 @@ keywords: microsoft, windows, project rome, iOS api reference
 
 # Command remote devices and apps (iOS)
 
-> **Important:** Before you use this guide, make sure you have completed all of the preliminary steps laid out in [Getting started with Connected Devices](getting-started-rome-iOS.md).
+Here you will find guidance on how to implement commanding scenarios in your iOS apps. 
+
+See the [API reference](../api-reference/index.md) page for links to the reference docs relevant to these scenarios. See the [iOS sample app](https://github.com/Microsoft/project-rome/tree/master/iOS/samples) for a working example of Project Rome features.
 
 The commanding scenarios, featured in the Device Relay namespaces, use a watcher pattern in which available devices are detected over time through various types of network connections and corresponding events are raised. This guide will show how to discover remote devices and apps and then launch apps or interact with app services.
 
+First, initialize the Connected Devices Platform. If you have done this already, skip to the next section.
+
+[!INCLUDE [ios/platform-init](../../../includes/ios/platform-init.md)]
+
+Next, you must register the application with the Connected Devices Platform cloud directory. If you've done this already, skip to the next section.
+
+[!INCLUDE [ios/app-register](../../../includes/ios/app-register.md)]
+
 ## Discover remote devices and apps
 
-A **MCDRemoteSystemWatcher** instance will handle the core functionality of this section.
+A **MCDRemoteSystemWatcher** instance will handle the core functionality of this section. Declare one in the class which is to discover remote systems.
 
 ```ObjectiveC
 // Create a RemoteSystemWatcher to discover devices
 MCDRemoteSystemWatcher* _watcher;
 ```
 
-Before you create a watcher and start discovering devices, you may wish to add discovery filters to determine which kinds of devices your app will target. These can be determined by the user or hard-coded into the app, depending on your use case.
+Before you create a watcher and start discovering devices, you may wish to add discovery filters to determine which kinds of devices your app will target. These can be determined by user input or hard-coded into the app, depending on your use case.
 
-The following code from the sample demonstrates the creation and starting of the watcher instance. Note that event handlers are registered just before; these will allow your app to parse and interact with the devices that are discovered. 
+The following code from the sample app demonstrates the creation and starting of the watcher instance. Note that event handlers are registered just before; these will allow your app to parse and interact with the devices that are discovered. 
 
 ```ObjectiveC
 // Start watcher with filter for transport types, form factors
@@ -102,10 +112,12 @@ The event handler methods are defined here.
 }
 ```
 
-It is recommended that your app maintain a list of discovered devices (represented by **MCDRemoteSystem** instances) and display information about available devices and their apps (such as display name and device type) on the UI. 
+We recommend that your app maintain a list of discovered devices (represented by **MCDRemoteSystem** instances) and display information about available devices and their apps (such as display name and device type) on the UI. 
 
 Once `[_watcher start]` is called, it will begin watching for remote system activity and will raise events when connected devices are discovered, updated, or removed from the set of detected devices. It will scan continuously in the background, so it is recommended that you stop the watcher (with `[_watcher stop]`) when you no longer need it to avoid unnecessary network communication and battery drain.
 
+## Implement a commanding scenario
+TBD - pick up work here.
 At this point in your code, you should have a working list of **MCDRemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The three major types of actions are remote launching, remote app services, and nearby file sharing. They are explained in the following three sections.
 
 ## A) Remote launching
