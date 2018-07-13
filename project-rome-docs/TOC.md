@@ -44,5 +44,6 @@
 ## [Nearby sharing](nearby-sharing/index.md)
 ### Windows
 ### Android
+#### [API reference](nearby-sharing/android/api-reference/index.md)
 
 

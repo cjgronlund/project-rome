@@ -6,6 +6,10 @@ keywords: microsoft, windows, project rome, Android api reference
 
 # Command remote devices and apps (Android)
 
+Here you will find guidance on how to implement commanding scenarios in your Android apps. [!INCLUDE [android/dev-reqs](../../../includes/android/dev-reqs.md) 
+
+See the [API reference](api-reference/index.md) page for links to the reference docs relevant to these scenarios. See the [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) for a working example of Project Rome features.
+
 The commanding scenarios, featured in the Device Relay namespaces, use a watcher pattern in which available devices are detected over time through various types of network connections and corresponding events are raised. This guide will show how to discover remote devices and apps and then launch apps or interact with app services.
 
 First, initialize the Connected Devices Platform and register your app. If you have done this already, skip to the next section.
@@ -425,5 +429,7 @@ private void closeAppServiceConnection()
 ```
 
 ### Related topics
+* [API reference page](../api-reference/index.md) 
+* [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) 
 * [Communicate with a remote app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/communicate-with-a-remote-app-service)
 * [Create and consume an app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).

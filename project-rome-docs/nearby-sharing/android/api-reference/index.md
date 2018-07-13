@@ -1,7 +1,9 @@
-# Nearshare namespace
-```
-com.microsoft.connecteddevices.nearshare
-```
+## Android nearby sharing API reference
 
-The Nearshare namespace contains APIs that Android devices to participate in the nearby sharing feature of Windows. This allows for the easy sharing of files between nearby devices, even when they are operating on different platforms.
+The following namespaces contain APIs that allow an Android app to implement the Windows nearby sharing feature.
 
+### Namespaces
+
+#### [Base](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.base)
+#### [Core](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.core)
+#### [NearShare](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.nearshare)
