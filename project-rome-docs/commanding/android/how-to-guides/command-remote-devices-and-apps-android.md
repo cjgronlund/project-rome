@@ -8,11 +8,13 @@ keywords: microsoft, windows, project rome, Android api reference
 
 The commanding scenarios, featured in the Device Relay namespaces, use a watcher pattern in which available devices are detected over time through various types of network connections and corresponding events are raised. This guide will show how to discover remote devices and apps and then launch apps or interact with app services.
 
-First, initialize the Connected Devices platform and register your app. If you have done this already, skip to the next section.
+First, initialize the Connected Devices Platform and register your app. If you have done this already, skip to the next section.
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
 
-[!INCLUDE [android/platform-init](../../../includes/android/app-register.md)]
+Next, you must register the application with the Connected Devices Platform cloud directory. If you've done this already, skip to the next section.
+
+[!INCLUDE [android/app-register](../../../includes/android/app-register.md)]
 
 
 ## Discover remote devices and apps
@@ -164,7 +166,7 @@ The following code shows how to select one of these devices (ideally this is don
 
 It's important to note that a remote launch can target a remote device (in which case the host device will launch the given URI with its default app for that URI scheme) _or_ a specific remote application on that device. 
 
-As the previous section demonstrates, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices platform (just as you registered your own app in the preliminary steps above). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
+As the previous section demonstrates, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices Platform (just as you registered your own app in the preliminary steps above). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
 
 ```java
 // this could be a RemoteSystemApplication instead. Either way, it 
@@ -218,9 +220,9 @@ Your Android app can use the Connected Devices Portal interact with app services
 #### Set up the app service on the target device
 This guide will use the [Roman Test App for Windows](http://aka.ms/romeapp) as its target app service. Therefore, the code below will cause an Android app to look for that specific app service on the given remote system. If you wish to test this scenario, download the Roman Test App on a Windows device and make sure you are signed in with the same MSA that you used in the preliminary steps above. 
 
-For instructions on how to write your own UWP app service, see [Create and consume an app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).
+For instructions on how to write your own UWP app service, see [Create and consume an app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service). You will need to make a few changes in order to make the service compatible with Connected Devices. See the [UWP guide for remote app services](https://docs.microsoft.com/windows/uwp/launch-resume/communicate-with-a-remote-app-service) for instructions on how to do this. 
 
-If you are writing your own app service on Windows, you will need to make a few edits in order to make the service compatible with Connected Devices. See the [UWP guide for remote app services](https://docs.microsoft.com/windows/uwp/launch-resume/communicate-with-a-remote-app-service) for instructions on how to do this. 
+For instructions on how to set up a host app service on Android, see the [Hosting guide](../../../hosting/android/how-to-guides/hosting-android.md).
 
 #### Open an app service connection on the client device
 Your Android app must acquire a reference to a remote device or application. Like the launch section, this scenario requires the use of a **RemoteSystemConnectionRequest**, which can be constructed from either a **RemoteSystem** or a **RemoteSystemApplication** representing an available app on the system.

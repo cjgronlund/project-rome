@@ -1,7 +1,7 @@
 
 ## Register app with the cloud directory
 
-Next, you must register the application with the Connected Devices platform cloud directory. You may wish to put the following method in a separate helper class.
+App registration is done through the **IRemoteSystemApplicationRegistration** interface. You may wish to put the following method in a separate helper class.
 
 ```Java
 

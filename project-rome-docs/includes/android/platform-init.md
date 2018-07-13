@@ -1,5 +1,5 @@
 
-## Preliminary setup for the Connected Devices platform
+## Preliminary setup for the Connected Devices Platform
 
 Before implementing remote connectivity, there are a few steps you'll need to take to give your Android app the capability to connect to remote devices.
 
@@ -9,7 +9,7 @@ Microsoft Account (MSA) authentication is required for all features of the SDK, 
 
 If you do not already have an MSA, Register for one on [account.microsoft.com](https://account.microsoft.com/account).
 
-Next, you must register your app with Microsoft by following the cross platform instructions on the [Application Registration Portal](https://apps.dev.microsoft.com/) (if you do not have a Microsoft developer account, you must create one first). You should receive a client ID string for your app; save this for later. This will allow your app to access Microsoft's Connected Devices platform resources. 
+Next, you must register your app with Microsoft by following the cross platform instructions on the [Application Registration Portal](https://apps.dev.microsoft.com/) (if you do not have a Microsoft developer account, you must create one first). You should receive a client ID string for your app; save this for later. This will allow your app to access Microsoft's Connected Devices Platform resources. 
 
 ### Add the SDK
 
@@ -46,7 +46,7 @@ In your project's *AndroidManifest.xml* file, add the following permissions insi
 ```
 
 > [!NOTE]
-> The Bluetooth-related permissions are only necessary for using Bluetooth discovery; they are not needed for the other features in the Connected Devices platform. Additionally, `ACCESS_COARSE_LOCATION` is only required on Android SDKs 21 and later. On Android SDKs 23 and later, the developer must also prompt the user to grant location access at runtime.
+> The Bluetooth-related permissions are only necessary for using Bluetooth discovery; they are not needed for the other features in the Connected Devices Platform. Additionally, `ACCESS_COARSE_LOCATION` is only required on Android SDKs 21 and later. On Android SDKs 23 and later, the developer must also prompt the user to grant location access at runtime.
 
 Next, go to the activity class(es) where you would like the Connected Devices functionality to live. Import the **connecteddevices** namespaces.
 
@@ -56,7 +56,7 @@ import com.microsoft.connecteddevices.*;
 
 Depending on which scenarios you implement, you many not need all of the namespaces. You may also need to add other Android-native namespaces as you progress.
 
-### Initialize the Connected Devices platform
+### Initialize the Connected Devices Platform
 
 Before any Connected Devices features can be used, the platform must be initialized within your app. The initialization steps should occur in your main class' **onCreate** or **onResume** method, because they are required before other Connected Devices scenarios can take place. 
 
@@ -64,7 +64,7 @@ You must instantiate the **Platform** class. The **Platform** constructor takes 
 
 The **NotificationProvider** parameter is only needed for certain scenarios. It can be left `null` for now.
 
-The **UserAccountProvider** is needed to deliver an OAuth 2.0 access token for the current user's access to the Connected Devices platform. It will be called the first time the app is run and upon the expiration of a platform-managed refresh token. 
+The **UserAccountProvider** is needed to deliver an OAuth 2.0 access token for the current user's access to the Connected Devices Platform. It will be called the first time the app is run and upon the expiration of a platform-managed refresh token. 
 
 In an attempt to help developers onboard with the platform more easily, we have provided account provider implementations for Android and iOS. These implementations, found in the [authentication provider sample](https://github.com/Microsoft/project-rome/tree/master/Android/samples/account-provider-sample), can be used to obtain the OAuth 2.0 access token and refresh token for your app.
 
