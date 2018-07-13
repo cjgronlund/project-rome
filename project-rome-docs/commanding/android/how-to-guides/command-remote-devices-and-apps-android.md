@@ -12,6 +12,8 @@ First, initialize the Connected Devices platform and register your app. If you h
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
 
+[!INCLUDE [android/platform-init](../../../includes/android/app-register.md)]
+
 
 ## Discover remote devices and apps
 
