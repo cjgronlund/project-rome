@@ -154,17 +154,15 @@ public void stopWatcher() {
 }
 ```
 ## Implement a commanding scenario
-At this point in your code, you should have a working list of **RemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The two major types of interactions are remote launching and remote app services. They are explained in the following sections.
+At this point in your code, you should have a working list of **RemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The main types of interaction are remote launching and remote app services. They are explained in the following sections.
 
 ### A) Remote launching
 
-The following code shows how to select one of these objects (ideally this is done through a UI control) and then use **RemoteLauncher** to launch an app on it by passing an app-compatible URI. 
+The following code shows how to select one of these devices (ideally this is done through a UI control) and then use **RemoteLauncher** to launch an app on it by passing an app-compatible URI. 
 
 It's important to note that a remote launch can target a remote device (in which case the host device will launch the given URI with its default app for that URI scheme) _or_ a specific remote application on that device. 
 
-Depending on the URI that is sent, you can launch an app in a specific state or configuration on a remote device. This allows for the ability to continue a user task, like watching a movie, on a different device without interruption. 
-
-As the previous section demonstrates, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices Platform (just as you registered your own app in the preliminary steps above). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
+As the previous section demonstrates, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices platform (just as you registered your own app in the preliminary steps above). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
 
 ```java
 // this could be a RemoteSystemApplication instead. Either way, it 
@@ -191,7 +189,6 @@ Use the returned **AsyncOperation** to handle the result of the launch attempt.
     
 ```Java
     // ...
-    
     resultOperation.whenCompleteAsync(new AsyncOperation.ResultBiConsumer<RemoteLaunchUriStatus, Throwable>() {
         @Override
         public void accept(RemoteLaunchUriStatus status, Throwable throwable) throws Throwable {
@@ -208,54 +205,20 @@ Use the returned **AsyncOperation** to handle the result of the launch attempt.
     });
 }
 ```
+Depending on the URI that is sent, you can launch an app in a specific state or configuration on a remote device. This allows for the ability to continue a user task, like watching a movie, on a different device without interruption. 
 
-Depending on your use, you may need to cover the cases in which no apps on the targeted system can handle the URI, or multiple apps can handle it. The **[RemoteLauncher](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.commanding._remote_launcher)** class and **[RemoteLauncherOptions](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.commanding._remote_launcher_options)** class describe how to do this.
+Depending on your use case, you may need to cover the cases in which no apps on the targeted system can handle the URI, or multiple apps can handle it. The **[RemoteLauncher](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.commanding._remote_launcher)** class and **[RemoteLauncherOptions](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.commanding._remote_launcher_options)** class describe how to do this.
 
 ### B) Remote app services
 
-Your Android app can use the Connected Devices Portal interact with app services on other devices.
-
-This provides many ways to communicate with other devices&mdash;all without needing to bring an app to the foreground of the host device. 
+Your Android app can use the Connected Devices Portal interact with app services on other devices. This provides many ways to communicate with other devices&mdash;all without needing to bring an app to the foreground of the host device. 
 
 #### Set up the app service on the target device
-This guide will use the [Roman Test App for Windows](http://aka.ms/romeapp) as its target app service. In other words, the code below will cause an Android app to look for that specific app service on the given remote system. If you wish to test this scenario, download the Roman Test App on a Windows device and make sure you are signed in with the same MSA you used in the preliminary steps above. 
+This guide will use the [Roman Test App for Windows](http://aka.ms/romeapp) as its target app service. Therefore, the code below will cause an Android app to look for that specific app service on the given remote system. If you wish to test this scenario, download the Roman Test App on a Windows device and make sure you are signed in with the same MSA that you used in the preliminary steps above. 
 
-For instructions on how to write your own UWP app service, see [Create and consume an app service](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).
+For instructions on how to write your own UWP app service, see [Create and consume an app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).
 
-If you are writing your own app service on Windows, you will need to make a few edits in order to make the service compatible with Connected Devices. In Visual Studio, go to the app service provider project and select its _Package.appxmanifest_ file. Right-click and select **View Code** to view the full contents of the file. Find the **Extension** element that defines the project as an app service and names its parent project.
-
-``` xml
-...
-<Extensions>
-    <uap:Extension Category="windows.appService" EntryPoint="RandomNumberService.RandomNumberGeneratorTask">
-        <uap:AppService Name="com.microsoft.randomnumbergenerator"/>
-    </uap:Extension>
-</Extensions>
-...
-```
-
-Change the namespace of the **AppService** element to **uap3** and add the **SupportsRemoteSystems** attribute:
-
-``` xml
-...
-<uap3:AppService Name="com.microsoft.randomnumbergenerator" SupportsRemoteSystems="true"/>
-...
-```
-
-In order to use elements in this new namespace, you must add the namespace definition at the top of the manifest file.
-
-``` xml
-<?xml version="1.0" encoding="utf-8"?>
-<Package
-  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
-  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3">
-  ...
-</Package>
-```
-
-Build your app service provider project and deploy it to the target device(s).
+If you are writing your own app service on Windows, you will need to make a few edits in order to make the service compatible with Connected Devices. See the [UWP guide for remote app services](https://docs.microsoft.com/windows/uwp/launch-resume/communicate-with-a-remote-app-service) for instructions on how to do this. 
 
 #### Open an app service connection on the client device
 Your Android app must acquire a reference to a remote device or application. Like the launch section, this scenario requires the use of a **RemoteSystemConnectionRequest**, which can be constructed from either a **RemoteSystem** or a **RemoteSystemApplication** representing an available app on the system.
@@ -268,7 +231,7 @@ Your Android app must acquire a reference to a remote device or application. Lik
 private RemoteSystem target = null;
 
 ```
-Additionally, your app will need to identify its targeted app service by two strings: the *app service name* and *package identifier*. These are found in the source code of the app service provider (see [Create and consume an app service](https://msdn.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service) for details). Together they construct the **AppServiceDescription**, which is fed into an **AppServiceConnection**.
+Additionally, your app will need to identify its targeted app service using two strings: the *app service name* and *package identifier*. These are found in the source code of the app service provider (see [Create and consume an app service (UWP)](https://msdn.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service) for details on how to get this strings for Windows app services). Together these strings construct the **AppServiceDescription**, which is fed into an **AppServiceConnection** instance.
 
 ```Java
 // this is defined below
@@ -291,7 +254,7 @@ private void onNewConnectionButtonClicked()
 }
 ```
 
-So, an **AppServiceConnection** uses a **RemoteSystemConnectionRequest** to determine which remote system or app to target, and it uses its internal **AppServiceDescription** to determine the app service. This is necessary because a single app could provide multiple app services.
+The **AppServiceConnection** instance it uses its internal **AppServiceDescription** to determine the app service. It also uses a **RemoteSystemConnectionRequest** to determine which remote system or app to target. This is necessary because a single app could provide multiple app services. The method below creates a **RemoteSystemConnectionRequest** and then opens the app service connection.
 
 ```Java
 /**
@@ -307,18 +270,10 @@ private void openAppServiceConnection()
 
     RemoteSystemConnectionRequest connectionRequest = new RemoteSystemConnectionRequest(target));
 
-    /*Will asynchronously open the app service connection using the given connection request
-    When this is done, we log the traffic in the UI for visibility to the user (for sample purposes)
-    We can check the status of the connection to determine whether or not it was successful, and show some UI if it wasn't (in this case it is part of the list item)
-    AppServiceConnectionStatus can be as follows:
-    SUCCESS(0),
-    APP_NOT_INSTALLED(1),
-    APP_UNAVAILABLE(2),
-    APPSERVICE_UNAVAILABLE(3),
-    UNKNOWN(4),
-    REMOTE_SYSTEM_UNAVAILABLE(5),
-    REMOTE_SYSTEM_NOT_SUPPORTEDBYAPP(6),
-    NOT_AUTHORIZED(7)
+    /* Will asynchronously open the app service connection using the given connection request
+    * When this is done, we log the traffic in the UI for visibility to the user (for sample purposes)
+    * We can check the status of the connection to determine whether or not it was successful, and show 
+    * some UI if it wasn't (in this case it is part of the list item).
     */
     connection.openRemoteAsync(connectionRequest)
         .thenAcceptAsync(new AsyncOperation.ResultConsumer<AppServiceConnectionStatus>() {
@@ -343,63 +298,17 @@ private void openAppServiceConnection()
 }
 ```
 
-#### Handle connection events
-
-Here, the implementations of the listener interfaces used above are defined. These classes handle connection-related events as well as events that represent response messages from the app service.
-
-```java 
-// Define the connection listener class:
-class AppServiceConnectionListener implements IAppServiceConnectionListener { 
-    
-    @Override
-    public void onSuccess() {
-        Log.i("MyActivityName", "AppServiceConnectionListener onSuccess");
-        // connection was successful. initiate messaging or adjust UI to enable a messaging scenario.
-    }
-
-    @Override
-    public void onError(AppServiceConnectionStatus status) {
-        Log.e("MyActivityName", "AppServiceConnectionListener onError status [" + status.toString()+"]");
-        // failed to establish connection. inspect the cause of error and reflect back to the UI
-    }
-
-    @Override
-    public void onClosed(AppServiceConnectionClosedStatus status) {
-        Log.i("MyActivityName", "AppServiceConnectionListener onClosed status [" + status.toString()+"]");
-        // the connection closed. inspect the cause of closure and reflect back to the UI
-    }
-} 
-
-// Define the response listener class:
-class AppServiceResponseListener implements IAppServiceResponseListener { 
- 
-    @Override
-    public void responseReceived(AppServiceResponse response) {
-        AppServiceResponseStatus status = response.getStatus();
-
-        if (status == AppServiceResponseStatus.SUCCESS) {
-            // last message was delivered successfully
-
-            Bundle bundle = response.getMessage();
-            Log.i("MyActivityName", "Received successful AppService response");
-            // parse the expected key/value data stored in "bundle"
-        } else {
-            Log.e("MyActivityName", "IAppServiceResponseListener.responseReceived status != SUCCESS");
-            // inspect "status" for the cause of unsuccessful message delivery
-        }
-    }
-} 
-```
 #### Create a message to send to the app service
 
-On Android, the messages that you send to remote app services will be of the following type.
+Declare a variable for the message to send. On Android, the messages that you send to remote app services will be of the following type.
 
 ```Java
 private Map<String, Object> mMessagePayload = null;
 ```
-> **Note:** When your app communicates with app services on other platforms, the Connected Devices Platform translates the **Map** into the equivalent construct on the receiving platform. For example, a **[Map](https://developer.android.com/reference/java/util/Map)** sent from this app to a Windows app service gets translated into a [**ValueSet**](https://msdn.microsoft.com/library/windows/apps/windows.foundation.collections.valueset) object (of the .NET Framework), which can then be interpreted by the app service. Information passed in the other direction undergoes the reverse translation.
+> [!NOTE]
+> When your app communicates with app services on other platforms, the Connected Devices Platform translates the **Map** into the matching construct on the receiving platform. For example, a **[Map](https://developer.android.com/reference/java/util/Map)** sent from this app to a Windows app service gets translated into a [**ValueSet**](https://msdn.microsoft.com/library/windows/apps/windows.foundation.collections.valueset) object (of the .NET Framework), which can then be interpreted by the app service. Information passed in the other direction undergoes the reverse translation.
 
-The following method crafts a message that can be interpreted by the Roman Test App's app service for Windows.
+The following method composes a message that can be interpreted by the Roman Test App's app service for Windows.
 
 ```Java
 /**
@@ -420,11 +329,12 @@ private void onMessageButtonClicked()
 }
 ```
 
-> **Note:** The **Map**s that are passed between apps and services in the remote app services scenario must adhere to the following format: Keys must be Strings, and the values may be: Strings, boxed numeric types (integers or floating points), boxed booleans, android.graphics.Point, android.graphics.Rect, java.util.Date, java.util.UUID, homogeneous arrays of any of these types, or other **Map** objects that meet this specification.
+> [!IMPORTANT]
+> The **Map**s that are passed between apps and services in the remote app services scenario must adhere to the following format: Keys must be Strings, and the values may be: Strings, boxed numeric types (integers or floating points), boxed booleans, android.graphics.Point, android.graphics.Rect, java.util.Date, java.util.UUID, homogeneous arrays of any of these types, or other **Map** objects that meet this specification.
 
-#### Send messages to the app service
+#### Send message to the app service
 
-Once the app service connection is established and the message is created, sending it to the app service is simple and can be done from anywhere in the app that has a reference to the connection instance and the message.
+Once the app service connection is established and the message is created, sending it to the app service is simple and can be done from anywhere in the app that has a reference to the app service connection instance and the message.
 
 
 ```java
@@ -438,7 +348,7 @@ private AtomicInteger mMessageIdAppServices = new AtomicInteger(0);
 * Send a message using the app service connection
 * Send the given Map object through the given AppServiceConnection. Uses an internal messageId
 * for logging purposes.
-* @param connection AppSerivceConnection to send the Map payload
+* @param connection AppServiceConnection to send the Map payload
 * @param message Payload to be translated to a ValueSet
 */
 private void sendMessage(final AppServiceConnection connection, Map<String, Object> message)
@@ -459,12 +369,13 @@ private void sendMessage(final AppServiceConnection connection, Map<String, Obje
             @Override
             public Void apply(Throwable throwable) throws Throwable {
                 // report the exception, referencing "throwable"
+                
                 return null;
             }
         });
 
     // optionally log the outbound message request here, referencing 
-    // "connection.getAppServiceDescription().getName()" as the recipient.
+    // connection.getAppServiceDescription().getName() as the recipient.
 }
 ```
 
@@ -480,8 +391,7 @@ private void handleAppServiceResponse(AppServiceResponse appServiceResponse, lon
         Map<String, Object> response;
         response = appServiceResponse.getMessage();
 
-        // in the Roman App case, the response contains the date it was
-        // created.
+        // in the Roman App case, the response contains the date it was created.
         String dateStr = (String)response.get("CreationDate");
         DateFormat df = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         
@@ -491,26 +401,25 @@ private void handleAppServiceResponse(AppServiceResponse appServiceResponse, lon
             Date startDate = df.parse(dateStr);
             Date nowDate = new Date();
             long diff = nowDate.getTime() - startDate.getTime();
+            // do something with "diff"
         } catch (ParseException e) { e.printStackTrace(); }
     }
 }
 ```
-That concludes a single message exchange with a remote app service.
+This concludes a single message exchange with a remote app service.
 
 #### Finish app service communication
 
 When your app is finished interacting with the target device's app service, close the connection between the two devices.
 
 ```java
-/**
-* Close the given AppService connection
-*/
+// Close the given AppService connection
 private void closeAppServiceConnection()
 {
     connection.close();
 }
 ```
 
-
 ### Related topics
+* [Communicate with a remote app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/communicate-with-a-remote-app-service)
 * [Create and consume an app service (UWP)](https://docs.microsoft.com/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).
