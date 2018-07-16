@@ -10,9 +10,6 @@ User Activities are data constructs that represent a user's tasks within an appl
 
 With the Project Rome SDK, your Android app can not only publish User Activities for use in Windows features such as Timeline, but can also act as an endpoint and read Activities back to the user just as Timeline does on Windows devices. This allows cross-device apps to transcend their platforms and provide experiences that follow users rather than devices.
 
-> [!IMPORTANT]
-> As this is a preview release, there are some known bugs in the Project Rome platform. Currently, Windows apps cannot read Activities created by Android/iOS apps, and the same holds true for the reverse. We are working on a timely fix. 
-
 First, you must initialize the Connected Devices Platform. If you've done this already, skip to the next section.
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
