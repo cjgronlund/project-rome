@@ -252,6 +252,9 @@ The following method crafts a message that can be interpreted by the Roman Test 
 }
 ```
 
+> [!IMPORTANT]
+> The **NSDictionary** objects that are passed between apps and services in the remote app services scenario must adhere to the following format: Keys must be **NSString**s, and the values may be: **NSString**, boxed numeric types (integers or floating points), boxed booleans, **NSDate**, **NSUUID**, homogeneous arrays of any of these types, or other **NSDictionary** objects that meet this specification. 
+
 #### Send messages to the app service
 
 Once the app service connection is established and the message is created, sending it to the app service is simple and can be done from anywhere in the app that has a reference to the connection instance and the message.
