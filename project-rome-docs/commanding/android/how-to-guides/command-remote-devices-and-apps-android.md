@@ -23,7 +23,7 @@ Next, you must register the application with the Connected Devices Platform clou
 
 ## Discover remote devices and apps
 
-A **RemoteSystemWatcher** instance will handle the core functionality of this section. Declare one in the class which is to discover remote systems.
+A **RemoteSystemWatcher** instance will handle the core functionality of this section. Declare it in the class which is to discover remote systems.
 
 ```Java
 private RemoteSystemWatcher mWatcher = null;
@@ -171,7 +171,7 @@ The following code shows how to select one of these devices (ideally this is don
 
 It's important to note that a remote launch can target a remote device (in which case the host device will launch the given URI with its default app for that URI scheme) _or_ a specific remote application on that device. 
 
-As the previous section demonstrates, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices Platform (just as you registered your own app in the preliminary steps above). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
+As the previous section demonstrated, discovery happens at the device level first (a **RemoteSystem** represents a device), but you can call the `getApplications` method on a **RemoteSystem** instance to get an array of **RemoteSystemApplication** objects, which represent apps on the remote device that have been registered to use the Connected Devices Platform (just as you registered your own app in the preliminary steps above). Both **RemoteSystem** and **RemoteSystemApplication** can be used to construct a **RemoteSystemConnectionRequest**, which is what is needed to launch a URI.
 
 ```java
 // this could be a RemoteSystemApplication instead. Either way, it 
@@ -263,7 +263,7 @@ private void onNewConnectionButtonClicked()
 }
 ```
 
-The **AppServiceConnection** instance it uses its internal **AppServiceDescription** to determine the app service. It also uses a **RemoteSystemConnectionRequest** to determine which remote system or app to target. This is necessary because a single app could provide multiple app services. The method below creates a **RemoteSystemConnectionRequest** and then opens the app service connection.
+The **AppServiceConnection** instance it uses a **RemoteSystemConnectionRequest** to determine which remote system or app to target, and it uses its internal **AppServiceDescription** to determine the app service. This is necessary because a single app could provide multiple app services. The method below creates a **RemoteSystemConnectionRequest** and then opens the app service connection.
 
 ```Java
 /**
@@ -309,7 +309,7 @@ private void openAppServiceConnection()
 
 #### Create a message to send to the app service
 
-Declare a variable for the message to send. On Android, the messages that you send to remote app services will be of the following type.
+Declare a variable to store the message to send. On Android, the messages that you send to remote app services will be of the **Map** type.
 
 ```Java
 private Map<String, Object> mMessagePayload = null;
@@ -415,6 +415,8 @@ private void handleAppServiceResponse(AppServiceResponse appServiceResponse, lon
     }
 }
 ```
+In the Roman App case, the response contains the date it was created, so in this very simple use case, we can compare the dates to get the total transit time of the message response.
+
 This concludes a single message exchange with a remote app service.
 
 #### Finish app service communication

@@ -59,6 +59,8 @@ The following code from the sample app shows the initialization of the platform.
 
     // Initialize platform
     [AppDataSource sharedInstance].platform = [MCDPlatform platformWithAccountProvider:[AppDataSource sharedInstance].accountProvider notificationProvider:notificationProvider];
+
+    // ...
 }
 ```
 

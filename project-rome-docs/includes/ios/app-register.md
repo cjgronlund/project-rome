@@ -1,6 +1,8 @@
 ## Register app with the cloud directory
 
-App registration is done through the **MCDRemoteSystemApplicationRegistration** class. The following code registers the app; you can put it directly below the platform initialization code. 
+App registration is done through the **MCDRemoteSystemApplicationRegistration** class. Create an instance by using the **MCDRemoteSystemApplicationRegistrationBuilder** class, optionally adding in app service providers (**[MCDAppServiceProvider](../objectivec-api/hosting/MCDAppServiceProvider.md)**) and a URI launcher (**[MCDLaunchUriProvider](../objectivec-api/hosting/MCDLaunchUriProvider.md)**); these are only needed for certain scenarios and are not required at this step.
+
+The following code from the sample app shows the registration of the app. Registration code should go directly below the platform initialization code. 
 
 ```ObjectiveC
 - (void)initializePlatform

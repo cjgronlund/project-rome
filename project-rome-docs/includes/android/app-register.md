@@ -33,7 +33,7 @@ public static void registerApp(Context context, ArrayList<AppServiceProvider> ap
 }
 ```
 
-In your main class, after **Platform** initialization, add the following code to register the application. Note that app service providers and the launch URI handler, which are only needed for certain scenarios, are not provided at this step.
+In your main class, after **Platform** initialization, add the following code to register the application. Note that app service providers (**[AppServiceProvider](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.hosting._app_service_provider)**) and the URI launcher (**[LaunchUriProvider](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.hosting._launch_uri_provider)**), which are only needed for certain scenarios, are not provided at this step.
 
 ```Java
 RegistrationHelperClass.register(this, null, null, new EventListener<UserAccount, CloudRegistrationStatus>() {
