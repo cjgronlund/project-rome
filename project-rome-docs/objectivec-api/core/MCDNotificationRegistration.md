@@ -66,5 +66,3 @@ Creates a new instance of this class with the given notification type, token, ap
 * `token` The NSData that APN service sends to your app delegate's didRegisterForRemoteNotificationsWithDeviceToken: method. You must convert the NSData into a string by hex-encoding it.
 * `appId` The app's bundle identifier.
 * `appDisplayName` The name of the app that was used for registration on the Microsoft dev portal.
-
-> Note: Apps that use Google Cloud Messaging notifications (NotificationType value **GCM**) will not be able to send or receive push notifications for users in China.

@@ -1,4 +1,3 @@
-
 ## Preliminary setup for push notifications
 
 ### Register your app for push notifications

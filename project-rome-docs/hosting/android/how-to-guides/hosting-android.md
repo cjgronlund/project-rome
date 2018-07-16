@@ -8,8 +8,6 @@ keywords: microsoft, windows, project rome, Android api reference
 
 This guide shows how to make your app available as a host app that can be remotely launched or provide app service resources to a remote client device. The [Command remote devices and apps](../../../commanding/android/how-to-guides/command-remote-devices-and-apps-android.md) guide shows how to set up the client side of these actions.
 
-The Project Rome SDK enables scenarios that allow apps to communicate with either an Android or iOS device. This includes the syncing of User Activities on the device as well as launching and messaging. 
-
 First, initialize the Connected Devices Platform by following the steps below. If you've done this already, skip to the next section.
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]
@@ -43,7 +41,7 @@ The procedure for creating app services that can be accessed by remote devices c
 
 The **AppServiceProvider**'s `onConnectionOpened` method passes in an **[AppServiceConnection](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.commanding._app_service_connection)** representing the connection to the calling app. Use this connection's `addRequestReceivedListener` method to register an event handler for incoming requests. The event handler will receive an **[AppServiceRequestReceivedEventArgs](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.commanding._app_service_request_received_event_args)** object, from which it will get an **[AppServiceRequest](https://docs.microsoft.com/java/api/com.microsoft.connecteddevices.commanding._app_service_request)** containing a **Map** of key/value data. Your app service should handle this data in whatever way is intended and send a response message using the **AppServiceRequest**'s `sendResponseAsync` method.
 
-> [!NOTE]
+> [!IMPORTANT]
 > The **Map**s that are passed between apps and services in the remote app services scenario must adhere to the following format: Keys must be Strings, and the values may be: Strings, boxed numeric types (integers or floating points), boxed booleans, android.graphics.Point, android.graphics.Rect, java.util.Date, java.util.UUID, homogeneous arrays of any of these types, or other **Map** objects that meet this specification.
 
 ## Related topics
