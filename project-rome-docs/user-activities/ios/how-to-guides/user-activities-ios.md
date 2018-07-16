@@ -6,21 +6,25 @@ keywords: microsoft, windows, project rome, iOS api reference
 
 # Publishing and reading User Activities (iOS)
 
-> **Important:** Before you use this guide, make sure you have completed all of the preliminary steps laid out in [Getting started with Connected Devices](getting-started-rome-iOS.md). Additionally, you will need to have completed the "Preliminary setup" section of the [Hosting guide](hosting-iOS.md).
-
 User Activities are data constructs that represent a user's tasks within an application. They make it possible to save a snapshot of a current task to be continued at a later time. The [Windows Timeline](https://blogs.windows.com/windowsexperience/2018/04/27/make-the-most-of-your-time-with-the-new-windows-10-update/) feature presents Windows users with a scrollable list of all their recent activities, represented as cards with text and graphics. For more information about User Activities in general, see [Continue user activity, even across devices](https://docs.microsoft.com/windows/uwp/launch-resume/useractivities).
 
 With the Project Rome SDK, your iOS app can not only publish User Activities for use in Windows features such as Timeline, but it can also act as an endpoint and read Activities back to the user just as Timeline does. This allows cross-device apps to completely transcend their platforms and present experiences that follow users rather than devices.
 
-> Important: As this is a preview release, there are some known bugs in the Project Rome platform. Currently, Windows apps cannot read Activities created by iOS/Android apps, and the same holds true for the reverse. We are working on a timely fix. 
+First, you must initialize the Connected Devices Platform. If you've done this already, skip to the next section.
+
+[!INCLUDE [ios/platform-init](../../../includes/ios/platform-init.md)]
+
+Next, you must enable your app to receive push notifications. If you've done this already, skip to the next section.
+
+[!INCLUDE [ios/notification-init](../../../includes/ios/notification-init.md)]
 
 ## Initialize a User Activity channel
 
-To implement User Activity features in your app, you will first need to initialize the user activity feed by creating a **MCDUserActivityChannel**. You should treat this like the Platform initialization step in the [Getting started guide](getting-started-rome-iOS.md): it should be checked and possibly re-done whenever the app comes to the foreground (but not before Platform initialization).
+To implement User Activity features in your app, you will first need to initialize the user activity feed by creating a **MCDUserActivityChannel**. You should treat this like the Platform initialization step above: it should be checked and possibly redone whenever the app comes to the foreground (but not before Platform initialization). 
 
-You will need a signed-in user account for this step. As in the Getting started guide, you may use a class from the [authentication provider sample](https://github.com/Microsoft/project-rome/tree/master/iOS/samples/account-provider-sample) to easily acquire the MCDUserAccount(s). You will also need your cross-platform app ID, which was retrieved through the Microsoft Developer Dashboard registration in the [Hosting guide](hosting-ios.md).
+You will need a signed-in user account for this step. As above, you may use a class from the [authentication provider sample](https://github.com/Microsoft/project-rome/tree/master/iOS/samples/account-provider-sample) to easily acquire the **MCDUserAccount**(s). You will also need your cross-platform app ID, which was retrieved through the Microsoft Developer Dashboard registration.
 
-The following method from the sample app initializes a **MCDUserActivityChannel**.
+The following method from the sample app initializes an **MCDUserActivityChannel**.
 
 ```ObjectiveC
 // You must be logged in to use UserActivities
@@ -44,11 +48,11 @@ else
 }
 ```
 
-At this point, you should have a **UserActivityChannel** reference in `channel`.
+At this point, you should have an **MCDUserActivityChannel** reference in `channel`.
 
 ## Create and publish a User Activity
 
-The following code shows how a new **MCDUserActivity** instance is created in the sample.
+The following sample code shows how a new **MCDUserActivity** instance is created.
 
 ```ObjectiveC
 - (IBAction)createActivityButton:(id)sender
@@ -82,7 +86,7 @@ The following code shows how a new **MCDUserActivity** instance is created in th
 }
 ```
 
-In the next method, the visual data of the **MCDUserActivity** is set before the Activity is published. The activationUri will determine what action is taken when the UserActivity is activated (when it is selected in Timeline, for example). The displayText will be shown on other devices when they view the Activity (in Windows Timeline, for example). The iconUri is a web link to an icon image.
+In the next method, the visual data of the **MCDUserActivity** is set before the Activity is published. The activation URI will determine what action is taken when the Activity is activated (when it is selected in Timeline, for example). The display text will be shown on other devices when they view the Activity (in Windows Timeline, for example). The iconUri is a web link to an icon image.
 
 
 ```ObjectiveC
@@ -96,7 +100,9 @@ In the next method, the visual data of the **MCDUserActivity** is set before the
 
     // ...
 ```
-Once the MCDUserActivity is populated with this data, the publish operation takes place.
+For more information on the different ways that a UserActivity can be customized, see the **[MCDUserActivity](../../objectivec-api/useractivities/MCDUserActivity.md)**, **[MCDUserActivityVisualElements](../../objectivec-api/useractivities/MCDUserActivityVisualElements.md)**, and **[MCDUserActivityAttribution](../../objectivec-api/useractivities/MCDUserActivityAttribution.md)** classes.
+
+Once the **MCDUserActivity** is populated with this data, the publish operation takes place.
 
 ```ObjectiveC
     // ...
@@ -124,7 +130,7 @@ mActivationUri = "http://contoso.com");
 
 ```
 
-For more information on the different ways that a UserActivity can be customized, see the **[MCDUserActivity](../api-reference/activities/useractivities/MCDUserActivity.md)**, **[MCDUserActivityVisualElements](../api-reference/activities/useractivities/MCDUserActivityVisualElements.md)**, and **[MCDUserActivityAttribution](../api-reference/activities/useractivities/MCDUserActivityAttribution.md)** classes.
+
 
 
 ## Update an existing User Activity
@@ -133,7 +139,7 @@ If you have an existing activity and wish to update its information (in the even
 
 Once you've created a session, your app can make any desired changes to the properties of the **UserActivity**. When you're done making changes, close the session. 
 
-The following button method from the sample app toggles a session on and off.
+The following method from the sample app toggles a session on and off.
 
 ```ObjectiveC
 - (IBAction)manageSessionButton:(id)sender
@@ -163,11 +169,11 @@ The following button method from the sample app toggles a session on and off.
 ```
 
 
-A **MCDUserActivitySession** can be viewed as a way to create a **MCDUserActivitySessionHistoryItem** (covered in the next section). Rather than create a new **MCDUserActivity** every time a user moves to a new page, you can simply create a new session for each page. This will make for a more intuitive and organized activity reading experience.
+An **MCDUserActivitySession** can be thought of as a way to create a **MCDUserActivitySessionHistoryItem** (covered in the next section). Rather than create a new **MCDUserActivity** every time a user moves to a new page, you can simply create a new session for each page. This will make for a more intuitive and organized activity reading experience.
 
 ## Read User Activities
 
-Your app can read User Activities and present them to the user just as the Windows Timeline feature does. To set up User Activity reading, you use the same **MCDUserActivityChannel** as explained at the beginning of this guide. The app receives **MCDUserActivitySessionHistoryItem** instances, which represent a user's engagement in a particular Activity during a specific period of time.
+Your app can read User Activities and present them to the user just as the Windows Timeline feature does. To set up User Activity reading, you use the same **MCDUserActivityChannel** instance from earlier. This instance can expose **MCDUserActivitySessionHistoryItem** instances, which represent a user's engagement in a particular Activity during a specific period of time.
 
 ```ObjectiveC
 - (IBAction)readActivityButton:(id)sender
@@ -197,4 +203,4 @@ Your app can read User Activities and present them to the user just as the Windo
 }
 ```
 
-Now your app should have a populated list of **UserActivitySessionHistoryItem**s. Each of these can deliver the underlying **UserActivity** (see [MCDUserActivitySessionHistoryItem](../api-reference/activities/useractivities/MCDUserActivitySessionHistoryItem.md) for details), which you can then display to the user.
+Now your app should have a populated list of **MCDUserActivitySessionHistoryItem**s. Each of these can deliver the underlying **MCDUserActivity** (see **[MCDUserActivitySessionHistoryItem](../../objectivec-api/useractivities/MCDUserActivitySessionHistoryItem.md)** for details), which you can then display to the user.
