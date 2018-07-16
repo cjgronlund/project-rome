@@ -117,7 +117,6 @@ We recommend that your app maintain a list of discovered devices (represented by
 Once `[_watcher start]` is called, it will begin watching for remote system activity and will raise events when connected devices are discovered, updated, or removed from the set of detected devices. It will scan continuously in the background, so it is recommended that you stop the watcher (with `[_watcher stop]`) when you no longer need it to avoid unnecessary network communication and battery drain.
 
 ## Implement a commanding scenario
-TBD - pick up work here.
 At this point in your code, you should have a working list of **MCDRemoteSystem** objects that refer to available devices. What you do with these devices will depend on the function of your app. The three major types of actions are remote launching, remote app services, and nearby file sharing. They are explained in the following three sections.
 
 ## A) Remote launching
