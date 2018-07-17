@@ -1,3 +1,15 @@
+---
+title: include file
+description: include file
+ms.author: pafarley
+ms.date: 07/17/2018
+ms.topic: include
+ms.prod: windows
+ms.technology: uwp
+ms.assetid: 
+ms.localizationpriority: medium
+---
+
 ## Preliminary setup for Connected Devices functionality
 
 Before implementing remote connectivity, there are a few steps you'll need to take to give your iOS app the capability to connect to remote Windows devices.

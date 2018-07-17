@@ -1,7 +1,14 @@
 ---
 title: Publishing and reading User Activities (Android)
 description: This guide shows how to create, publish, and read Windows-based User Activities in your Android app.
-keywords: microsoft, windows, project rome, Android api reference 
+ms.author: pafarley
+ms.date: 07/17/2018
+ms.topic: article
+ms.prod: windows
+ms.technology: uwp
+keywords: microsoft, windows, project rome, user activities, android
+ms.assetid: 
+ms.localizationpriority: medium
 ---
 
 # Publishing and reading User Activities (Android)

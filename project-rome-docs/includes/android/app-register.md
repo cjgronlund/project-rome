@@ -1,3 +1,14 @@
+---
+title: include file
+description: include file
+ms.author: pafarley
+ms.date: 07/17/2018
+ms.topic: include
+ms.prod: windows
+ms.technology: uwp
+ms.assetid: 7ffe1891-788a-456d-9076-338485390204
+ms.localizationpriority: medium
+---
 
 ## Register app with the cloud directory
 

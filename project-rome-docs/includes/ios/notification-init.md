@@ -1,3 +1,15 @@
+---
+title: include file
+description: include file
+ms.author: pafarley
+ms.date: 07/17/2018
+ms.topic: include
+ms.prod: windows
+ms.technology: uwp
+ms.assetid: 
+ms.localizationpriority: medium
+---
+
 ## Preliminary setup for push notifications
 
 ### Register your app for push notifications

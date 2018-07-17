@@ -1,3 +1,15 @@
+---
+title: include file
+description: include file
+ms.author: pafarley
+ms.date: 07/17/2018
+ms.topic: include
+ms.prod: windows
+ms.technology: uwp
+ms.assetid: 
+ms.localizationpriority: medium
+---
+
 ## Register app with the cloud directory
 
 App registration is done through the **MCDRemoteSystemApplicationRegistration** class. Create an instance by using the **MCDRemoteSystemApplicationRegistrationBuilder** class, optionally adding in app service providers (**[MCDAppServiceProvider](../../objectivec-api/hosting/MCDAppServiceProvider.md)**) and a URI launcher (**[MCDLaunchUriProvider](../../objectivec-api/hosting/MCDLaunchUriProvider.md)**); these are only needed for certain scenarios and are not required at this step.
