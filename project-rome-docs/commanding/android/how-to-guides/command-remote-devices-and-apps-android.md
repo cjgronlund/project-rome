@@ -6,7 +6,7 @@ keywords: microsoft, windows, project rome, Android api reference
 
 # Command remote devices and apps (Android)
 
-Here you will find guidance on how to implement commanding scenarios in your Android apps. [!INCLUDE [android/dev-reqs](../../../includes/android/dev-reqs.md) 
+Here you will find guidance on how to implement commanding scenarios in your Android apps. [!INCLUDE [android/dev-reqs](../../../includes/android/dev-reqs.md)]
 
 See the [API reference](../api-reference/index.md) page for links to the reference docs relevant to these scenarios. See the [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) for a working example of Project Rome features.
 

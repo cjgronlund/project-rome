@@ -24,7 +24,7 @@ Creates and initializes a new instance of this class with a user account, platfo
 #### Parameters
 * `userAccount` The user accound that this data will be associated with.
 * `platform` The **MCDPlatform** instance that has been initialized for this app's Connected Devices functionality.
-* `activitySourceHost` The cross-platform app ID. This is retrieved through the Microsoft Developer Dashboard registration (see [Hosting cross-device experiences (iOS)](../../../how-to-guides/hosting-ios.md)).
+* `activitySourceHost` The cross-platform app ID. This is retrieved through the Microsoft Developer Dashboard registration (see [Hosting cross-device experiences (iOS)](../../hosting/ios/how-to-guides/hosting-ios.md)).
 
 
 #### Returns

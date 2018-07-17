@@ -100,7 +100,7 @@ In the next method, the visual data of the **MCDUserActivity** is set before the
 
     // ...
 ```
-For more information on the different ways that a UserActivity can be customized, see the **[MCDUserActivity](../../objectivec-api/useractivities/MCDUserActivity.md)**, **[MCDUserActivityVisualElements](../../objectivec-api/useractivities/MCDUserActivityVisualElements.md)**, and **[MCDUserActivityAttribution](../../objectivec-api/useractivities/MCDUserActivityAttribution.md)** classes.
+For more information on the different ways that a UserActivity can be customized, see the **[MCDUserActivity](../../../objectivec-api/useractivities/MCDUserActivity.md)**, **[MCDUserActivityVisualElements](../../../objectivec-api/useractivities/MCDUserActivityVisualElements.md)**, and **[MCDUserActivityAttribution](../../../objectivec-api/useractivities/MCDUserActivityAttribution.md)** classes.
 
 Once the **MCDUserActivity** is populated with this data, the publish operation takes place.
 
@@ -203,4 +203,4 @@ Your app can read User Activities and present them to the user just as the Windo
 }
 ```
 
-Now your app should have a populated list of **MCDUserActivitySessionHistoryItem**s. Each of these can deliver the underlying **MCDUserActivity** (see **[MCDUserActivitySessionHistoryItem](../../objectivec-api/useractivities/MCDUserActivitySessionHistoryItem.md)** for details), which you can then display to the user.
+Now your app should have a populated list of **MCDUserActivitySessionHistoryItem**s. Each of these can deliver the underlying **MCDUserActivity** (see **[MCDUserActivitySessionHistoryItem](../../../objectivec-api/useractivities/MCDUserActivitySessionHistoryItem.md)** for details), which you can then display to the user.
