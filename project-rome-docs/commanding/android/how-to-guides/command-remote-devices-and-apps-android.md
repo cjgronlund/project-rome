@@ -1,7 +1,14 @@
 ---
 title: Command remote devices and apps (Android)
 description: This guide will show how to discover remote devices and apps and then launch apps or interact with app services.
-keywords: microsoft, windows, project rome, Android api reference 
+ms.author: pafarley
+ms.date: 07/17/2018
+ms.topic: article
+ms.prod: windows
+ms.technology: uwp
+keywords: microsoft, windows, project rome, commanding, android
+ms.assetid: 
+ms.localizationpriority: medium
 ---
 
 # Command remote devices and apps (Android)
