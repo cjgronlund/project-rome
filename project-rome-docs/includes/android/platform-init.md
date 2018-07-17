@@ -16,9 +16,9 @@ Before implementing remote connectivity, there are a few steps you'll need to ta
 
 ### Sign-in
 
-Microsoft Account (MSA) authentication is required for all features of the SDK, except for the Nearby Sharing APIs. 
+Microsoft Account (MSA) or Azure Active Directory (AAD) authentication is required for all features of the SDK, except for the Nearby Sharing APIs. 
 
-If you do not already have an MSA, Register for one on [account.microsoft.com](https://account.microsoft.com/account).
+If you do not already have an MSA and wish to use one, register on [account.microsoft.com](https://account.microsoft.com/account).
 
 Next, you must register your app with Microsoft by following the cross platform instructions on the [Application Registration Portal](https://apps.dev.microsoft.com/) (if you do not have a Microsoft developer account, you must create one first). You should receive a client ID string for your app; save this for later. This will allow your app to access Microsoft's Connected Devices Platform resources. 
 
