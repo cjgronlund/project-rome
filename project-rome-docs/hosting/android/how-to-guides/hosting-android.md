@@ -7,7 +7,7 @@ ms.topic: article
 ms.prod: windows
 ms.technology: uwp
 keywords: microsoft, windows, project rome, hosting, android
-ms.assetid: 
+ms.assetid: e96b6e41-f2b2-48fd-906d-eed4b2fbb9a8
 ms.localizationpriority: medium
 ---
 

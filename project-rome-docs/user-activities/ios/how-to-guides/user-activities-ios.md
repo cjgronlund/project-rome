@@ -7,7 +7,7 @@ ms.topic: article
 ms.prod: windows
 ms.technology: uwp
 keywords: microsoft, windows, project rome, user activities, ios
-ms.assetid: 
+ms.assetid: 445f1dd4-f3c7-46e4-a7cd-42a1fb411172
 ms.localizationpriority: medium
 ---
 

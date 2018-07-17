@@ -6,7 +6,7 @@ ms.date: 07/17/2018
 ms.topic: include
 ms.prod: windows
 ms.technology: uwp
-ms.assetid: 
+ms.assetid: a1015e94-4b35-479c-b360-4c685fe8db53
 ms.localizationpriority: medium
 ---
 
