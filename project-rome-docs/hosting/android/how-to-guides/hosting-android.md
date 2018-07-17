@@ -8,6 +8,8 @@ keywords: microsoft, windows, project rome, Android api reference
 
 This guide shows how to make your app available as a host app that can be remotely launched or provide app service resources to a remote client device. The [Command remote devices and apps](../../../commanding/android/how-to-guides/command-remote-devices-and-apps-android.md) guide shows how to set up the client side of these actions.
 
+See the [API reference](../api-reference/index.md) page for links to the reference docs relevant to these scenarios. See the [Android sample app](https://github.com/Microsoft/project-rome/tree/master/Android/samples) for a working example of Project Rome features.
+
 First, initialize the Connected Devices Platform by following the steps below. If you've done this already, skip to the next section.
 
 [!INCLUDE [android/platform-init](../../../includes/android/platform-init.md)]

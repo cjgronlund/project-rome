@@ -10,6 +10,8 @@ User Activities are data constructs that represent a user's tasks within an appl
 
 With the Project Rome SDK, your iOS app can not only publish User Activities for use in Windows features such as Timeline, but it can also act as an endpoint and read Activities back to the user just as Timeline does. This allows cross-device apps to completely transcend their platforms and present experiences that follow users rather than devices.
 
+See the [API reference](../api-reference/index.md) page for links to the reference docs relevant to these scenarios.
+
 First, you must initialize the Connected Devices Platform. If you've done this already, skip to the next section.
 
 [!INCLUDE [ios/platform-init](../../../includes/ios/platform-init.md)]
