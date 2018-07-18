@@ -16,7 +16,7 @@ Before implementing remote connectivity, there are a few steps you'll need to ta
 
 ### Sign-in
 
-Microsoft Account (MSA) or Azure Active Directory (AAD) authentication is required for all features of the SDK, except for the Nearby Sharing APIs. 
+Microsoft Account (MSA) or Azure Active Directory (AAD) authentication is required for all features of the SDK, except for the Nearby sharing APIs. 
 
 If you do not already have an MSA and wish to use one, register on [account.microsoft.com](https://account.microsoft.com/account).
 
