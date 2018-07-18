@@ -10,7 +10,7 @@
 ### iOS
 #### [How-to guide](commanding/ios/how-to-guides/command-remote-devices-and-apps-ios.md)
 #### [API reference](commanding/ios/api-reference/index.md)
-### MSGraph
+### [Microsoft Graph](commanding/msgraph/index.md)
 
 ## [Hosting](hosting/index.md)
 ### Windows
@@ -33,21 +33,7 @@
 ### iOS
 #### [how-to guide](user-activities/ios/how-to-guides/user-activities-ios.md)
 #### [API reference](user-activities/ios/api-reference/index.md)
-### MSGraph
-
-## [MSGraph Notifications](msgraph-notifications/index.md)
-### Setup
-### Sending notifications with MSGraph APIs
-### Receiving notifications with the Project Rome SDK
-#### Windows
-##### How-to guides
-##### API reference
-#### Android
-##### How-to guides
-##### API reference
-#### iOS
-##### How-to guides
-##### API reference
+### [Microsoft Graph](user-activities/msgraph/index.md)
 
 ## [Nearby sharing](nearby-sharing/index.md)
 ### Android

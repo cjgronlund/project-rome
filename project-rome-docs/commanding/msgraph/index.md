@@ -1,15 +1,6 @@
----
-title: Project Rome with MSGraph (preview release)
-description:  Project Rome features can be implemented through REST API calls with Microsoft Graph.
-keywords: microsoft, windows, project rome, how-to MS Graph 
----
 
-# Project Rome for Microsoft Graph
+# Microsoft Graph Commanding APIs
 
-Project Rome features can be implemented through REST API calls with [Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/project_rome_overview). This allows you to discover your windows devices, launch apps, and interact with app services from any device capable of making HTTP requests. The following REST APIs are meant for these scenarios. Follow the links for full reference documentation.
+Commanding features can be implemented through REST API calls with Microsoft Graph. This allows you to discover your devices, launch apps, and interact with app services from any device capable of making HTTP requests. Microsoft Graph makes these scenarios simpler to implement than on the native platform SDKs, but it does not support all of the features Project Rome features or offer a native object model.
 
-* [List the user's devices](https://developer.microsoft.com/graph/docs/api-reference/beta/api/user_list_devices)
-
-* [Send a command to a device](https://developer.microsoft.com/graph/docs/api-reference/beta/api/send_device_command)
-
-* [Get command status](https://developer.microsoft.com/graph/docs/api-reference/beta/api/get_device_command_status)
+You can find more information and API reference documentation in the [Project Rome section of the Microsoft Graph docs](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/project_rome_overview#devices).
